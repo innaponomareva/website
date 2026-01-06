@@ -34,7 +34,8 @@ const hiddenChildren = [
   nthChild(7),
   nthChild(9),
   nthChild(12),
-  ...range(14, 16),
+  nthChild(14),
+  nthChild(16),
   nthChild(18),
   ...range(20, 21),
   ...range(23, 27),
@@ -55,7 +56,8 @@ const twinkleOutChildren = [
   nthChild(6),
   nthChild(10),
   nthChild(13),
-  nthChild(19),
+  nthChild(17),
+
   nthChild(22),
   nthChild(30),
   nthChild(33),
@@ -70,7 +72,7 @@ const twinkleInChildren = [
   nthChild(8),
   nthChild(11),
   nthChild(15),
-  nthChild(17),
+  nthChild(19),
   nthChild(28),
   nthChild(31),
   nthChild(35),
@@ -83,11 +85,10 @@ export const starsClass = css`
   position: absolute;
   inset: 0;
   z-index: 0;
-  height: 100%;
-  padding-top: 4rem;
   display: grid;
   grid-template-columns: repeat(10, 1fr);
-  gap: 12%;
+  justify-content: center;
+  column-gap: 15%;
 
   .star-wrapper {
     display: flex;
@@ -132,14 +133,9 @@ export const starsClass = css`
 
   & > :is(${hiddenChildren}) {
     opacity: 0;
-    color: red;
   }
 
-  ${mediaMin.xs} {
-    padding-top: 1rem;
-  }
-
-  ${mediaMin.lg} {
-    gap: 10%;
+  ${mediaMin.xl} {
+    column-gap: 10%;
   }
 `;
