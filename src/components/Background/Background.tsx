@@ -31,6 +31,7 @@ export default Background;
 const backgroundClass = css`
   position: relative;
   display: grid;
+  overflow: hidden;
 
   &.light {
     background: linear-gradient(

@@ -60,7 +60,7 @@ export const headerClass = css`
   flex-direction: column;
   align-items: center;
   position: absolute;
-  gap: 0.5rem;
+  gap: 1rem;
   z-index: 10;
   top: 0;
   left: 0;
