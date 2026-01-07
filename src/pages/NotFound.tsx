@@ -19,7 +19,10 @@ export default NotFound;
 
 const notFoundClass = css`
   min-height: 100vh;
-  min-height: 100svh;
+
+  @supports (min-height: 100svh) {
+    min-height: 100svh;
+  }
 
   .layout {
     grid-template-columns: minmax(auto, 900px);

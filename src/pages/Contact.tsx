@@ -19,7 +19,10 @@ export default Contact;
 
 const contactClass = css`
   min-height: 100vh;
-  min-height: 100svh;
+
+  @supports (min-height: 100svh) {
+    min-height: 100svh;
+  }
 
   .layout {
     min-height: 100vh;
