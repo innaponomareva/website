@@ -18,9 +18,12 @@ const Contact = () => {
 export default Contact;
 
 const contactClass = css`
-  height: 100vh;
+  min-height: 100vh;
+  min-height: 100svh;
 
   .layout {
+    min-height: 100vh;
+    min-height: 100svh;
     grid-template-columns: minmax(auto, 700px);
   }
 `;

@@ -18,8 +18,10 @@ const NotFound = () => {
 export default NotFound;
 
 const notFoundClass = css`
+  min-height: 100vh;
+  min-height: 100svh;
+
   .layout {
-    height: 100vh;
     grid-template-columns: minmax(auto, 900px);
   }
 `;
