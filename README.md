@@ -10,6 +10,7 @@ Welcome to my personal website, built with **React** and modern tooling — expl
 - **Contact Form** — Send me a message directly from the website.
 - **Responsive Design** — Works smoothly on both desktop and mobile.
 - **Animations & Interactions** — Subtle motion using Anime.js.
+- **Light & Dark Mode** — Switch themes for comfortable viewing
 - **Fast & Lightweight** — Built with Vite for quick performance.
 
 ## 🧩 Tech Stack
@@ -22,3 +23,6 @@ Welcome to my personal website, built with **React** and modern tooling — expl
 - **Anime.js**
 - **ReactHookForm**
 - **Vitest & RTL**
+
+<img width="1497" height="722" alt="Screenshot 2026-01-12 at 04 16 53" src="https://github.com/user-attachments/assets/93e394cd-fd84-43a2-b7b1-5176e7a2909e" />
+<img width="1495" height="719" alt="Screenshot 2026-01-12 at 04 17 51" src="https://github.com/user-attachments/assets/5d1ff200-d16c-4c25-8363-7d34e6a73203" />
