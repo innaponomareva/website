@@ -1,17 +1,24 @@
-Welcome to my website, where you can view my CV and send me a message.
+# Personal Website
 
-## Stack
+Welcome to my personal website, built with **React** and modern tooling — explore my CV, learn more about me, and get in touch.
 
-1. React
-2. Vite
-3. Contentful
-4. TypeScript
-5. Linaria
-6. Anime.js
-7. ReactHookForm
-8. Vitest
-9. RTL
+👉 **Live Demo:** https://innaponomareva.github.io/website/
 
-## GitHub Pages
+## 🚀 Features
 
-https://innaponomareva.github.io/website/
+- **CV** — View professional experience, skills, and background.
+- **Contact Form** — Send me a message directly from the website.
+- **Responsive Design** — Works smoothly on both desktop and mobile.
+- **Animations & Interactions** — Subtle motion using Anime.js.
+- **Fast & Lightweight** — Built with Vite for quick performance.
+
+## 🧩 Tech Stack
+
+- **React**
+- **Vite**
+- **Contentful**
+- **TypeScript**
+- **Linaria**
+- **Anime.js**
+- **ReactHookForm**
+- **Vitest & RTL**
