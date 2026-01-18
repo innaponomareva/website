@@ -4,7 +4,7 @@ import Button from '../Button';
 import { mediaMin } from '../../utils/css';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import Alert, { AlertTypes } from '../Alert';
-import { useState, type JSX } from 'react';
+import { useState } from 'react';
 import TextArea from './TextArea';
 
 interface ContactFormProps {
