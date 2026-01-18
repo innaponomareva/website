@@ -4,7 +4,7 @@ import Button from '../Button';
 import { mediaMin } from '../../utils/css';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import Alert, { AlertTypes } from '../Alert';
-import { useState } from 'react';
+import { useState, type JSX } from 'react';
 import TextArea from './TextArea';
 
 interface ContactFormProps {
@@ -17,32 +17,30 @@ type Inputs = {
   message: string;
 };
 
+type AlertState = {
+  type: AlertTypes;
+  message: React.ReactNode;
+};
+
 const ContactForm: React.FC<ContactFormProps> = ({ className }) => {
-  const [submittedName, setSubmittedName] = useState<string | null>(null);
+  const [alertState, setAlertState] = useState<AlertState | null>(null);
 
   const {
     register,
     handleSubmit,
-    setError,
     reset,
-    formState: {
-      errors,
-      isSubmitting,
-      isSubmitSuccessful,
-      touchedFields,
-      isDirty,
-      isValid,
-    },
+    formState: { errors, isSubmitting, touchedFields, isDirty, isValid },
   } = useForm<Inputs>({
     shouldFocusError: false,
     mode: 'onChange',
   });
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    setAlertState(null);
     try {
       const formData = new FormData();
       Object.entries(data).forEach(([key, value]) =>
-        formData.append(key, value)
+        formData.append(key, value),
       );
 
       const response = await fetch(
@@ -53,21 +51,38 @@ const ContactForm: React.FC<ContactFormProps> = ({ className }) => {
             Accept: 'application/json',
           },
           body: formData,
-        }
+        },
       );
 
       if (!response.ok) {
-        setError('root', {
-          message: 'Something went wrong. Please try again.',
+        setAlertState({
+          type: AlertTypes.ERROR,
+          message: (
+            <p className="message-error">
+              {'Something went wrong. Please try again.'}
+            </p>
+          ),
         });
         return;
       }
-      setSubmittedName(data.name);
+
+      setAlertState({
+        type: AlertTypes.SUCCESS,
+        message: (
+          <p className="message-succes">
+            Dear <span>{data.name}</span>, your message is sent!
+          </p>
+        ),
+      });
       reset();
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
-      setError('root', { message: `Failed to submit form. Error: ${message}` });
-      return;
+      setAlertState({
+        type: AlertTypes.ERROR,
+        message: (
+          <p className="message-error">{`Failed to submit form. Error: ${message}`}</p>
+        ),
+      });
     }
   };
 
@@ -76,22 +91,14 @@ const ContactForm: React.FC<ContactFormProps> = ({ className }) => {
       onSubmit={handleSubmit(onSubmit)}
       className={cx(contactFormClass, className)}
     >
-      {(isSubmitSuccessful || errors.root) && (
-        <Alert
-          type={isSubmitSuccessful ? AlertTypes.SUCCESS : AlertTypes.ERROR}
-          className="alert"
-          open={true}
-        >
-          {isSubmitSuccessful && (
-            <p className="message-succes">
-              Dear <span>{submittedName}</span>, your message is sent!
-            </p>
-          )}
-          {errors.root && (
-            <p className="message-error">{errors.root.message}</p>
-          )}
-        </Alert>
-      )}
+      <Alert
+        className="alert"
+        type={alertState?.type}
+        message={alertState?.message}
+        open={!!alertState}
+        hide={() => setAlertState(null)}
+      />
+
       <div className="contact-info">
         <TextInput
           id="name"

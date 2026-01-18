@@ -2,7 +2,6 @@ import { css, cx } from '@linaria/core';
 import { colors } from '../common';
 import { MdOutlineClose } from 'react-icons/md';
 import Button from './Button';
-import { useState } from 'react';
 
 export enum AlertTypes {
   PRIMARY = 'primary',
@@ -11,35 +10,28 @@ export enum AlertTypes {
 }
 
 interface AlertProps {
-  open: boolean;
-  children?: React.ReactNode;
-  type?: 'primary' | 'success' | 'error';
   className?: string;
+  type?: AlertTypes;
+  message?: React.ReactNode;
+  open: boolean;
+  hide: () => void;
 }
 
 const Alert: React.FC<AlertProps> = ({
   open,
-  children,
+  hide,
+  message = null,
   type = AlertTypes.PRIMARY,
   className,
 }) => {
-  const [isOpen, setIsOpen] = useState(open);
+  if (!open) return null;
 
   return (
-    <div
-      className={cx(
-        alertClass,
-        className,
-        isOpen ? 'visible' : 'hidden',
-        type === AlertTypes.SUCCESS && AlertTypes.SUCCESS,
-        type === AlertTypes.ERROR && AlertTypes.ERROR
-      )}
-      role="alert"
-    >
-      <Button className="close-btn" onClick={() => setIsOpen(false)}>
+    <div className={cx(alertClass, className, type)} role="alert">
+      <Button className="close-btn" type="button" onClick={hide}>
         <MdOutlineClose />
       </Button>
-      <>{children}</>
+      <>{message}</>
     </div>
   );
 };
@@ -58,12 +50,8 @@ export const alertClass = css`
   line-height: 1.5rem;
   color: ${colors.BLUE_2};
 
-  &.visible {
-    opacity: 1;
-  }
-
-  &.hidden {
-    opacity: 0;
+  &.${AlertTypes.PRIMARY} {
+    background-color: ${colors.BLUE_1};
   }
 
   &.${AlertTypes.SUCCESS} {

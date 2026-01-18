@@ -67,7 +67,7 @@ describe('<ContactForm />', () => {
         });
         it('should have a label element with correct text and attributes', () => {
           const labelElem = within(nameTextInputElem).getByText(
-            'name'
+            'name',
           ) as HTMLLabelElement;
 
           expect(labelElem).toBeInTheDocument();
@@ -75,7 +75,7 @@ describe('<ContactForm />', () => {
         });
         it('should have an input element with correct attributes', () => {
           const inputElem = within(nameTextInputElem).getByRole(
-            'textbox'
+            'textbox',
           ) as HTMLInputElement;
 
           expect(inputElem).toBeInTheDocument();
@@ -103,7 +103,7 @@ describe('<ContactForm />', () => {
         });
         it('should have a label element with correct text and attributes', () => {
           const labelElem = within(emailInputElem).getByText(
-            'email'
+            'email',
           ) as HTMLLabelElement;
 
           expect(labelElem).toBeInTheDocument();
@@ -111,7 +111,7 @@ describe('<ContactForm />', () => {
         });
         it('should have an input element with correct attributes', () => {
           const inputElem = within(emailInputElem).getByRole(
-            'textbox'
+            'textbox',
           ) as HTMLInputElement;
 
           expect(inputElem).toBeInTheDocument();
@@ -140,7 +140,7 @@ describe('<ContactForm />', () => {
       });
       it('should have a label element with correct text and attributes', () => {
         const labelElem = within(textAreaElem).getByText(
-          'message'
+          'message',
         ) as HTMLLabelElement;
 
         expect(labelElem).toBeInTheDocument();
@@ -148,7 +148,7 @@ describe('<ContactForm />', () => {
       });
       it('should have a textarea element with correct attributes', () => {
         const textareaElem = within(textAreaElem).getByRole(
-          'textbox'
+          'textbox',
         ) as HTMLInputElement;
 
         expect(textareaElem).toBeInTheDocument();
@@ -229,11 +229,11 @@ describe('<ContactForm />', () => {
         await user.clear(textAreaElem);
 
         const errorMessageElements = within(container).getAllByText(
-          'This field is required.'
+          'This field is required.',
         );
 
         errorMessageElements.forEach((errorElem) =>
-          expect(errorElem).toBeInTheDocument()
+          expect(errorElem).toBeInTheDocument(),
         );
         expect(errorMessageElements.length).toEqual(3);
       });
@@ -248,14 +248,14 @@ describe('<ContactForm />', () => {
         await user.click(nameInputElem);
 
         expect(
-          within(container).getByText('Please enter a valid email address.')
+          within(container).getByText('Please enter a valid email address.'),
         ).toBeInTheDocument();
 
         await user.type(emailInputElem, sampleValidEmail);
         await user.click(nameInputElem);
 
         expect(
-          within(container).queryByText('Please enter a valid email address.')
+          within(container).queryByText('Please enter a valid email address.'),
         ).not.toBeInTheDocument();
       });
       it('should show validation error when the message is shorter than 10 chars', async () => {
@@ -267,14 +267,14 @@ describe('<ContactForm />', () => {
         await user.click(nameInputElem);
 
         expect(
-          within(container).getByText('Your message is too short.')
+          within(container).getByText('Your message is too short.'),
         ).toBeInTheDocument();
 
         await user.type(textAreaElem, sampleValidMessage);
         await user.click(nameInputElem);
 
         expect(
-          within(container).queryByText('Your message is too short.')
+          within(container).queryByText('Your message is too short.'),
         ).not.toBeInTheDocument();
       });
       it('should show validation error when the message is longer than 100 chars', async () => {
@@ -286,7 +286,7 @@ describe('<ContactForm />', () => {
         await user.click(nameInputElem);
 
         expect(
-          within(container).getByText('Your message is too long.')
+          within(container).getByText('Your message is too long.'),
         ).toBeInTheDocument();
       });
     });
@@ -333,7 +333,7 @@ describe('<ContactForm />', () => {
         const alertElem = await within(container).findByRole('alert');
         expect(alertElem).toBeInTheDocument();
         expect(alertElem).toHaveTextContent(
-          `Dear ${sampleName}, your message is sent!`
+          `Dear ${sampleName}, your message is sent!`,
         );
         expect(alertElem).toHaveClass('alert');
         expect(alertElem).toHaveClass(AlertTypes.SUCCESS);
@@ -351,7 +351,7 @@ describe('<ContactForm />', () => {
         const alertElem = await within(container).findByRole('alert');
         expect(alertElem).toBeInTheDocument();
         expect(alertElem).toHaveTextContent(
-          'Something went wrong. Please try again.'
+          'Something went wrong. Please try again.',
         );
         expect(alertElem).toHaveClass('alert');
         expect(alertElem).toHaveClass(AlertTypes.ERROR);
@@ -372,7 +372,7 @@ describe('<ContactForm />', () => {
         expect(alertElem).toHaveClass('alert');
         expect(alertElem).toHaveClass(AlertTypes.ERROR);
         expect(alertElem).toHaveTextContent(
-          `Failed to submit form. Error: ${sampleErrorMessage}`
+          `Failed to submit form. Error: ${sampleErrorMessage}`,
         );
       });
     });
@@ -396,7 +396,7 @@ describe('<ContactForm />', () => {
             Accept: 'application/json',
           },
           body: expect.any(FormData),
-        }
+        },
       );
 
       const [, options] = fetchMock.mock.calls[0];
@@ -432,7 +432,7 @@ describe('<ContactForm />', () => {
             'translateX(-50%)',
             {
               modifier: alertModifier,
-            }
+            },
           );
         });
         it('should render name in bold in success message', () => {
@@ -441,7 +441,7 @@ describe('<ContactForm />', () => {
             'Roboto-Bold',
             {
               modifier: `${alertModifier} .message-succes span`,
-            }
+            },
           );
         });
       });
